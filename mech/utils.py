@@ -279,7 +279,7 @@ def build_mechfile(descriptor, name=None, version=None, requests_kwargs={}):
             if v:
                 version = v
             puts_err(colored.blue("Loading metadata for box '{}'{}".format(descriptor, " ({})".format(version) if version else "")))
-            url = 'https://app.vagrantup.com/{}/boxes/{}'.format(account, box)
+            url = os.getenv('MECH_CLOUD', 'https://app.vagrantup.com/{}/boxes/{}').format(account, box)
             r = requests.get(url, **requests_kwargs)
             r.raise_for_status()
             catalog = r.json()
